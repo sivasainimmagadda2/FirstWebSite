@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Bookmark</title>
+    <link rel="stylesheet" type="text/css" href="HtmlJspages1.css">
+    <script src="HtmlJspage1.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="conta pt-4">
+        <div class="Sub-container mt-4 p-4">
+            <h3 class="book-Heading ">Bookmark Your Favorite Sites</h3>
+            <div class="Form p-4 mt-4">
+                <form id="bookmarkForm">
+                    <div class="ml-4 mr-4">
+                        <label class="label-colors" for="siteNameInput">SITE NAME</label>
+                        <input id="siteNameInput" type="text" class="form-control" placeholder="Enter site name">
+                        <p id="siteNameErrMsg" class=" error mt-1"></p>
+                        <label class="label-colors mt-2" for="siteUrlInput">SITE URL</label>
+                        <input id="siteUrlInput" type="text" class="form-control" placeholder="Enter site URL">
+                        <p id="siteUrlErrMsg" class=" error mt-1"></p>
+                        <div class="d-flex justify-content-end">
+                            <button id="submitBtn" type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div id=Form class="Form mt-4 p-4 d-none ">
+                <ul id="bookmarksList" style="list-style-type:none;"></ul>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+<script>
+    // Example Valid URLs: https://learning.ccbp.in/, https://www.google.com/
+let bookmarkFormEl = document.getElementById("bookmarkForm");
+let siteNameInputEl = document.getElementById("siteNameInput");
+let siteUrlInputEl = document.getElementById("siteUrlInput");
+let siteNameErrMsgEl = document.getElementById("siteNameErrMsg");
+let siteUrlErrMsgEl = document.getElementById("siteUrlErrMsg");
+let FormEl = document.getElementById("Form");
+let bookmarksListEl = document.getElementById("bookmarksList");
+
+let formData = {
+    sitename: "",
+    siteurl: "",
+};
+siteNameInputEl.addEventListener("change", function(event) {
+    if (event.target.value === "") {
+        siteNameErrMsgEl.textContent = "Required*";
+    } else {
+        siteNameErrMsgEl.textContent = "";
+    }
+    formData.sitename = event.target.value;
+});
+siteUrlInputEl.addEventListener("change", function(event) {
+    if (event.target.value === "") {
+        siteUrlErrMsgEl.textContent = "Required*";
+
+    } else {
+        siteUrlErrMsgEl.textContent = "";
+
+    }
+    formData.siteurl = event.target.value;
+});
+
+function validationform() {
+    if (siteNameInputEl.value === "") {
+        siteNameErrMsgEl.textContent = "Required*";
+        FormEl.classList.add("d-none");
+        alert("Enter site name");
+    }
+    if (siteUrlInputEl.value === "") {
+        siteUrlErrMsgEl.textContent = "Required*";
+        alert("Enter site URL");
+    } else {
+        FormEl.classList.remove("d-none");
+    }
+}
+
+function submitandpost() {
+
+    let labelEl = document.createElement("li");
+    labelEl.textContent = siteNameInputEl.value;
+    labelEl.classList.add("google");
+    bookmarksListEl.appendChild(labelEl);
+
+    let brEl = document.createElement("br");
+    labelEl.appendChild(brEl);
+
+    let anchorEl = document.createElement("a");
+    anchorEl.href = siteUrlInputEl;
+    anchorEl.textContent = siteUrlInputEl.value;
+    anchorEl.target = "_blank";
+    anchorEl.classList.add("mt-3");
+    labelEl.appendChild(anchorEl);
+    siteNameInputEl.value="";
+    siteUrlInputEl.value="";
+
+
+
+}
+bookmarkFormEl.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+    validationform();
+    submitandpost();
+});
+</script>
+
+</html>

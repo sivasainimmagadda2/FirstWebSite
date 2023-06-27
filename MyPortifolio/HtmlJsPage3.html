@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Typing Test</title>
+    <link rel="stylesheet" type="text/css" href="HtmlJsPage3.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div id="speedTypingTest" class="bg-container p-4">
+        <h1>Speed <br>Typing Test</h1>
+        <p class="Text mt-4">On your fingers lets set Go!</p>
+        <div class="d-flex flex-row mt-4">
+            <img src="https://assets.ccbp.in/frontend/dynamic-webapps/clock-img.png" class="image mr-0">
+            <p id="timer" class="ml-4 mt-0 font"></p>
+            <p class="Text ml-1 mt-3">seconds</p>
+        </div>
+        <div class="sub-container p-4 d-flex flex-column mt-2">
+            <div class="text-center">
+                <div class="d-none mt-5 mb-5" id="spinner">
+                    <div class="d-flex flex-row justify-content-center">
+                        <div class="spinner-border" role="status">
+                        </div>
+                    </div>
+                </div>
+                <p id="quoteDisplay">Knowledge speaks, but wisdom listens.</p>
+            </div>
+            <div class="d-flex">
+                <textarea id="quoteInput" rows="8" cols="55" class="text" placeholder="Type here!!"></textarea>
+            </div>
+        </div>
+        <p class="result mt-3" id="result"></p>
+        <div class="d-flex flex-row mt-2">
+            <button id="submitBtn" class="submitt-btn">Submit</button>
+            <button id="resetBtn" class="submitt-btn2 ml-4">Reset</button>
+        </div>
+    </div>
+</body>
+<!-- -------------------------------------JavaScript-------------------------------------------- -->
+
+<script>
+    let speedtypingtestEl = document.getElementById("speedTypingTest");
+let timerEl = document.getElementById("timer");
+let quoteDisplayEl = document.getElementById("quoteDisplay");
+let resultEl = document.getElementById("result");
+let quoteInputEl = document.getElementById("quoteInput");
+let submitBtn = document.getElementById("submitBtn");
+let resetBtn = document.getElementById("resetBtn");
+let spinnerEl = document.getElementById("spinner");
+
+let counter = 0;
+let intervalId;
+
+function submit() {
+    if (quoteInputEl.value === quoteDisplayEl.textContent) {
+        resultEl.textContent = "You typed in " + counter + " seconds";
+        clearInterval(intervalId);
+        counter = 0;
+    } else {
+        resultEl.textContent = "You typed incorrect sentence";
+    }
+}
+
+function timerstart() {
+    intervalId = setInterval(function() {
+        counter = counter + 1;
+        timerEl.textContent = counter;
+    }, 1000);
+}
+let counterTimer = function() {
+    counter = counter + 1;
+    timerEl.textContent = counter;
+};
+intervalId = setInterval(counterTimer, 1000);
+
+let options = {
+    method: "GET"
+};
+let url = "https://apis.ccbp.in/random-quote";
+
+function getRandumQuations() {
+    spinnerEl.classList.remove("d-none");
+    quoteDisplayEl.classList.add("d-none");
+    clearInterval(intervalId);
+    counter = 0;
+    fetch(url, options)
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(jsonData) {
+            let randomquations = jsonData.content;
+            spinnerEl.classList.add("d-none");
+            quoteDisplayEl.classList.remove("d-none");
+            quoteDisplayEl.textContent = randomquations;
+        });
+    timerstart();
+}
+getRandumQuations();
+submitBtn.addEventListener("click", submit);
+resetBtn.addEventListener("click", getRandumQuations);
+resetBtn.onclick = function() {
+    clearInterval(intervalId);
+    timerstart();
+    resultEl.textContent = "";
+    quoteInputEl.value = "";
+};
+</script>
+
+
+</html>

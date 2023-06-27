@@ -1,0 +1,70 @@
+/* @import url("https://fonts.googleapis.com/css2?family=Bree+Serif&family=Caveat:wght@400;700&family=Lobster&family=Monoton&family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display+SC:ital,wght@0,400;0,700;1,700&family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&family=Source+Sans+Pro:ital,wght@0,400;0,700;1,700&family=Work+Sans:ital,wght@0,400;0,700;1,700&display=swap"); */
+
+.bg-container {
+    background-image: linear-gradient(to left, #dac0ff, #f3eaff);
+    height: 100%;
+}
+
+.image {
+    height: 40px;
+}
+
+h1 {
+    color: #690cb0;
+    font-size: 45px;
+    font-family: "Roboto";
+    font-weight: bold;
+}
+
+.font {
+    font-size: 30px;
+    color: #3e4c59;
+    font-weight: 500;
+}
+
+.Text {
+    color: #3e4c59;
+    font-weight: 500;
+}
+
+.sub-container {
+    background-color: #f3eaff;
+    height: 100%;
+    border-radius: 15px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #3e4c59;
+}
+
+.text {
+    width: 100vw;
+    height: 20vh;
+}
+
+.submitt-btn {
+    background-color: #690cb0;
+    color: white;
+    height: 30px;
+    width: 75px;
+    font-size: 12px;
+    font-weight: 500;
+    border-width: 0px;
+    border-radius: 5px;
+}
+
+.submitt-btn2 {
+    background-color: #ffffff;
+    color: #690cb0;
+    height: 30px;
+    width: 75px;
+    font-size: 12px;
+    font-weight: 500;
+    border-width: 0px;
+    border-radius: 5px;
+}
+
+.result {
+    font-size: 15px;
+    color: #3e4c59;
+    font-weight: 500;
+}
